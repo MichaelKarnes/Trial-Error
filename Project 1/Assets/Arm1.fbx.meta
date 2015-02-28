@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ed2d99cd33b84c44a8a04e1d4ebafc32
+guid: 3c3cce80212047c40b67f1c32922b3db
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
@@ -7,7 +7,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Rigid Base Assembly
+    4300000: Arm1
     9500000: //RootNode
   materials:
     importMaterials: 1
