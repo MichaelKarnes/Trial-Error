@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class RobotArm : MonoBehaviour {
 	float time;
@@ -37,13 +38,31 @@ public class RobotArm : MonoBehaviour {
 		//arm1.Multiply (new float[4,4] {{1,0,0,0},{0,c,s,0},{0,-s,c,0},{0,0,0,1}});
 	}
 	
+
+	/*void OnDrawGizmosSelected() {
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawSphere (paintPos, 100);
+	}*/
+
 	// Update is called once per frame
 	void Update () {
+
 		arm1.Update ();
 		arm2.Update ();
 		arm3.Update ();
 		dynamicbase.Update ();
 		staticbase.Update ();
+
+		Vector3 paint = arm3.t.position;
+		paint.x = paint.x-5;
+		paint.y = paint.y;
+		paint.z = paint.z;
+		//Vector3 paintPos = new Vector3 (arm3.t.position [3, 0], arm3.t.position [3, 1], arm3.t.position [3, 2]);
+		GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+		//mySphere.transform.localScale = Vector3(...);
+		sphere.transform.localScale += new Vector3 (0F, -.7F, -.7F);
+		sphere.transform.position = paint;
+		//OnDrawGizmosSelected ();
 		/*time += Time.deltaTime;
 		time = time % 4;
 		if (time < 2) {
@@ -64,4 +83,7 @@ public class RobotArm : MonoBehaviour {
 				t.position = new Vector3(frame[3,0], frame[3,1], frame[3,2]);
 			}*/
 	}
+
+
+
 }

@@ -5,7 +5,7 @@ public class RobotLink {
 	
 	public RobotLink prev = null;
 	public float[,] frame;
-	private Transform t;
+	public Transform t;
 
 	public RobotLink()
 	{
