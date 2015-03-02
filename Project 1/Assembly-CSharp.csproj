@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Circle.cs" />
      <Compile Include="Assets\RobotArm.cs" />
      <Compile Include="Assets\RobotJoint.cs" />
      <Compile Include="Assets\RobotLink.cs" />

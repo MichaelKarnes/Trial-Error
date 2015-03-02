@@ -10,9 +10,21 @@ public class RobotArm : MonoBehaviour {
 	RobotLink arm3;
 	RobotLink staticbase;
 	RobotLink dynamicbase;
+	
+	//	float titleHeight;
+	//	float titleWidth;
+
+	public Texture tex;
+	float buttonX;
+	float buttonZ;
+	float buttonY;
+	Vector3 buttonMovement;
+	public Sprite[] circleSprites;
+
 	/*RobotEndEffector arm;
 	RobotLink dynamicbase;
 	RobotBase staticbase;*/
+
 	// Use this for initialization
 	void Start () {
 		foreach (Transform t in transform) {
@@ -36,16 +48,50 @@ public class RobotArm : MonoBehaviour {
 		//float c = Mathf.Cos (x * Mathf.PI / 180);
 		//float s = Mathf.Sin (x * Mathf.PI / 180);
 		//arm1.Multiply (new float[4,4] {{1,0,0,0},{0,c,s,0},{0,-s,c,0},{0,0,0,1}});
-	}
-	
 
-	/*void OnDrawGizmosSelected() {
-		Gizmos.color = Color.yellow;
-		Gizmos.DrawSphere (paintPos, 100);
-	}*/
+		circleSprites = Resources.LoadAll<Sprite>("blue_circle");
+
+		buttonX = 0;
+		buttonZ = 0;
+		buttonY = 0;
+		buttonMovement = new Vector3 (buttonX, buttonY, buttonZ);
+	}
+
+	void OnGUI() 
+	{		
+		if (!tex)
+			Debug.LogError ("No texture Found, please assign a texture on the inspector");
+		
+		//if (GUILayout.Button ("Paint!")) --- Works as well 
+		Rect paintbutton = new Rect (10, 70, 50, 30);
+		paintbutton.position = new Vector2(978,200);
+		if(GUI.Button(paintbutton, "Paint!")) 
+		{
+			Debug.Log ("Clicked the button I wanted");
+
+			GameObject circle = new GameObject ("PaintTest");
+			circle.AddComponent<SpriteRenderer> ();
+			circle.GetComponent<SpriteRenderer> ().sprite = circleSprites [0];
+
+			Vector3 paint = arm3.t.position;
+			paint.x = paint.x - 3.9F;
+			paint.y = paint.y;
+			paint.z = paint.z;
+			
+			Vector3 circleSpriteRotation = new Vector3 (0, 90, 0);
+			circle.transform.Rotate (0, 90, 0);
+			circle.transform.localScale += new Vector3 (-.9F, -.9F, -.9F);
+			circle.transform.position = paint;
+		}
+	}
+
 
 	// Update is called once per frame
 	void Update () {
+
+		/*GameObject circle = new GameObject ("PaintTest");
+		circle.AddComponent<SpriteRenderer> ();
+		circle.GetComponent<SpriteRenderer> ().sprite = circleSprites [0];*/
 
 		arm1.Update ();
 		arm2.Update ();
@@ -53,27 +99,21 @@ public class RobotArm : MonoBehaviour {
 		dynamicbase.Update ();
 		staticbase.Update ();
 
-		Vector3 paint = arm3.t.position;
-		paint.x = paint.x-5;
-		paint.y = paint.y;
-		paint.z = paint.z;
-		//Vector3 paintPos = new Vector3 (arm3.t.position [3, 0], arm3.t.position [3, 1], arm3.t.position [3, 2]);
-		GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-		//mySphere.transform.localScale = Vector3(...);
-		sphere.transform.localScale += new Vector3 (0F, -.7F, -.7F);
-		sphere.transform.position = paint;
-		//OnDrawGizmosSelected ();
-		/*time += Time.deltaTime;
-		time = time % 4;
-		if (time < 2) {
-						foreach (Transform t in transform)
-								if (t.name == "Arm1")
-										t.Rotate (-10 * Time.deltaTime, 0, 0);
-				} else {
-						foreach (Transform t in transform)
-								if (t.name == "Arm1")
-										t.Rotate (10 * Time.deltaTime, 0, 0);
+		//if (Input.GetMouseButtonDown (0)) {  Works fine. Detects when mouse left button is clicked, not necessarily the created button.
+
+			/*Debug.Log ("Clicked the button I wanted");
+						Vector3 paint = arm3.t.position;
+						paint.x = paint.x - 3.9F;
+						paint.y = paint.y;
+						paint.z = paint.z;
+
+						Vector3 circleSpriteRotation = new Vector3 (0, 90, 0);
+						circle.transform.Rotate (0, 90, 0);
+						circle.transform.localScale += new Vector3 (-.9F, -.9F, -.9F);
+						circle.transform.position = paint;
+
 				}*/
+
 		/*float rx = Mathf.Atan2 (frame [2, 1], frame [2, 2]);
 		float ry = Mathf.Atan2 (-frame [2, 0], Mathf.Sqrt (Mathf.Pow (frame [2, 1], 2) + Mathf.Pow (frame[2, 2], 2)));
 		float rz = Mathf.Atan2 (frame [1, 0], frame [0, 0]);
