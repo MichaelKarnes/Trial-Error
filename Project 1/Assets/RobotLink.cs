@@ -9,11 +9,12 @@ public class RobotLink {
 
 	public RobotLink()
 	{
+		frame = new float[4,4]{{1,0,0,0},{0,1,0,0},{0,0,1,0},{0,0,0,1}};
 	}
-	public RobotLink(Transform t)
+	public RobotLink(Transform t, float posx, float posy, float posz)
 	{
 		this.t = t;
-		frame = new float[4,4]{{1,0,0,0},{0,1,0,0},{0,0,1,0},{t.position.x,t.position.y,t.position.z,1}};
+		frame = new float[4,4]{{1,0,0,0},{0,1,0,0},{0,0,1,0},{posx, posy, posz,1}};
 	}
 
 	public void Multiply( float[,] m )
