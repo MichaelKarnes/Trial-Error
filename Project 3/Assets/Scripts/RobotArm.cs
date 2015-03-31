@@ -14,8 +14,8 @@ public class RobotArm : MonoBehaviour {
 	int deg;
 	float t1, t2, t3 = 0;
 	Vector2 moveDir = Vector2.zero;
-
-	public Texture tex;
+	public Client client;
+	
 	public Sprite[] circleSprites;
 
 	void Start () {
@@ -37,58 +37,82 @@ public class RobotArm : MonoBehaviour {
 		circleSprites = Resources.LoadAll<Sprite>("blue_circle");
 	}
 
-	void RotateArm1L() {
+	public void RotateArm1L() {
 		part = arm1;
 		deg = -1;
+		if (client != null)
+			client.SendMessageToServer ("UpdateRobot", "RotateArm1L");
 	}
 
-	void RotateArm1R() {
+	public void RotateArm1R() {
 		part = arm1;
 		deg = 1;
+		if (client != null)
+			client.SendMessageToServer ("UpdateRobot", "RotateArm1R");
 	}
 
 	void RotateArm2L() {
 		part = arm2;
 		deg = 1;
+		if (client != null)
+			client.SendMessageToServer ("UpdateRobot", "RotateArm2L");
 	}
 	
 	void RotateArm2R() {
 		part = arm2;
 		deg = -1;
+		if (client != null)
+			client.SendMessageToServer ("UpdateRobot", "RotateArm2R");
 	}
 
 	void RotatePointerL() {
 		part = pointer;
 		deg = -1;
+		if (client != null)
+			client.SendMessageToServer ("UpdateRobot", "RotatePointerL");
 	}
 	
 	void RotatePointerR() {
 		part = pointer;
 		deg = 1;
+		if (client != null)
+			client.SendMessageToServer ("UpdateRobot", "RotatePointerR");
 	}
 
 	void StopRotate() {
 		part = null;
+		if (client != null)
+			client.SendMessageToServer ("UpdateRobot", "StopRotate");
 	}
 
 	void MoveUp() {
 		moveDir = Vector2.up;
+		if (client != null)
+			client.SendMessageToServer ("UpdateRobot", "MoveUp");
 	}
 
 	void MoveDown() {
 		moveDir = -Vector2.up;
+		if (client != null)
+			client.SendMessageToServer ("UpdateRobot", "MoveDown");
 	}
 
 	void MoveLeft() {
 		moveDir = -Vector2.right;
+		if (client != null)
+			client.SendMessageToServer ("UpdateRobot", "MoveLeft");
 	}
 
 	void MoveRight() {
 		moveDir = Vector2.right;
+		if (client != null)
+			client.SendMessageToServer ("UpdateRobot", "MoveRight");
 	}
 
 	void StopMove() {
 		moveDir = Vector2.zero;
+		if (client != null)
+			client.SendMessageToServer ("UpdateRobot", "StopMove");
 	}
 
 	private void Move() {

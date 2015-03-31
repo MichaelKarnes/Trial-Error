@@ -12,10 +12,30 @@ Platform assembly: C:\Users\Michael\Documents\Trial&Error\Project 3\Builds\Clien
 Loading C:\Users\Michael\Documents\Trial&Error\Project 3\Builds\Client_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: C:\Users\Michael\Documents\Trial&Error\Project 3\Builds\Client_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading C:\Users\Michael\Documents\Trial&Error\Project 3\Builds\Client_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.180 seconds
+- Completed reload, in  0.055 seconds
 desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
 Platform assembly: C:\Users\Michael\Documents\Trial&Error\Project 3\Builds\Client_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\Michael\Documents\Trial&Error\Project 3\Builds\Client_Data\Managed\System.dll (this message is harmless)
+Sent message: 3/31/2015 6:19:30 AM
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Sent message: RotateArm1L
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Sent message: StopRotate
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Sent message: RotateArm2L
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+Sent message: StopRotate
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+

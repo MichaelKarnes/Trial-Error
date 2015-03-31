@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class Client : MonoBehaviour {
 	private string IP;
 	private int Port;
+	private NetworkPlayer player;
+	private TimeSpan delay;
 
 	// Use this for initialization
 	void Start () {
@@ -31,7 +34,7 @@ public class Client : MonoBehaviour {
 			}
 		}
 	}
-
+	
 	void Connect() {
 		if (Network.peerType != NetworkPeerType.Disconnected)
 			return;
@@ -41,4 +44,40 @@ public class Client : MonoBehaviour {
 		transform.Find ("Port").GetComponent<Text> ().text = "Port: "+Port;
 		Network.Connect (IP, Port);
 	}
+
+	void OnConnectedToServer() {
+		SendMessageToServer("CalculateDelay", DateTime.UtcNow.ToString());
+	}
+
+	[RPC]
+	void SetNetworkPlayer(NetworkPlayer player) {
+		this.player = player;
+	}
+
+	[RPC]
+	void SetDelay(string delaystr) {
+		delay = TimeSpan.Parse (delaystr);
+	}
+
+	[RPC]
+	public void SendMessageToServer(string func, string msg){
+		GetComponent<NetworkView>().RPC(func, RPCMode.Server, msg);
+		print ("Sent message: " + msg);
+	}
+	
+	[RPC]
+	void ReceiveMessageFromServer(string msg) {
+		print ("Received message: "+msg);
+		//messagelog += someInfo + "\n";
+	}
+	
+	// fix RPC errors
+	[RPC]
+	void UpdateRobot(string message) { }
+	[RPC]
+	void CalculateDelay(string delay) { }
+	[RPC]
+	void SendMessageToClient(string func, string msg) { }
+	[RPC]
+	void ReceiveMessageFromClient(string msg) { }
 }

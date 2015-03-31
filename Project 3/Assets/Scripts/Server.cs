@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using System.Net;
-using System.Text;
-using System.Text.RegularExpressions;
+using System;
 
 public class Server : MonoBehaviour {
 	private string IP = "127.0.0.1";
 	private int Port = 25001;
+	private TimeSpan delay;
+	public RobotArm robot;
 
 	// Use this for initialization
 	void Start () {
@@ -33,4 +33,46 @@ public class Server : MonoBehaviour {
 		Destroy (transform.Find ("Create").gameObject);
 		Network.InitializeServer (10, Port);
 	}
+
+	[RPC]
+	void UpdateRobot(string message) {
+		print ("Received message: " + message);
+		robot.BroadcastMessage (message);
+	}
+
+	void OnPlayerConnected(NetworkPlayer player) {
+		print ("Player Connected");
+		print ("Sending NetworkPlayer...");
+		GetComponent<NetworkView>().RPC("SetNetworkPlayer", RPCMode.Others, player);
+	}
+
+	[RPC]
+	void CalculateDelay(string datetime) {
+		DateTime t2 = DateTime.UtcNow;
+		DateTime t1 = DateTime.Parse (datetime);
+		delay = t2 - t1;
+		SendMessageToClient("SetDelay", delay.ToString ());
+		print (delay);
+	}
+	
+	[RPC]
+	void ReceiveMessageFromClient(string msg) {
+		print ("Received message: "+msg);
+	}
+
+	[RPC]
+	void SendMessageToClient(string func, string msg) {
+		GetComponent<NetworkView>().RPC(func, RPCMode.Others, msg);
+		print ("Sent message: "+msg);
+	}
+	
+	// fix RPC errors
+	[RPC]
+	void SetDelay(string delay) { }
+	[RPC]
+	void SetNetworkPlayer(NetworkPlayer player) { }
+	[RPC]
+	void SendMessageToServer(string func, string msg) { }
+	[RPC]
+	void ReceiveMessageFromServer(string msg) { }
 }
