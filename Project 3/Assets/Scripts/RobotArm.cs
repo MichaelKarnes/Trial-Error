@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class RobotArm : MonoBehaviour {
 	float time;
@@ -38,81 +39,80 @@ public class RobotArm : MonoBehaviour {
 	}
 
 	public void RotateArm1L() {
+		if (client != null)
+			client.RotateArm1L(BitConverter.GetBytes (DateTime.UtcNow.Ticks));
 		part = arm1;
 		deg = -1;
-		if (client != null)
-			client.SendMessageToServer ("UpdateRobot", "RotateArm1L");
 	}
 
 	public void RotateArm1R() {
+		if (client != null)
+			client.RotateArm1R(BitConverter.GetBytes (DateTime.UtcNow.Ticks));
 		part = arm1;
 		deg = 1;
-		if (client != null)
-			client.SendMessageToServer ("UpdateRobot", "RotateArm1R");
 	}
 
-	void RotateArm2L() {
+	public void RotateArm2L() {
+		if (client != null)
+			client.RotateArm2L(BitConverter.GetBytes (DateTime.UtcNow.Ticks));
 		part = arm2;
 		deg = 1;
-		if (client != null)
-			client.SendMessageToServer ("UpdateRobot", "RotateArm2L");
 	}
 	
-	void RotateArm2R() {
+	public void RotateArm2R() {
 		part = arm2;
 		deg = -1;
 		if (client != null)
-			client.SendMessageToServer ("UpdateRobot", "RotateArm2R");
+			client.RotateArm2R(BitConverter.GetBytes (DateTime.UtcNow.Ticks));
 	}
-
-	void RotatePointerL() {
+	public void RotatePointerL() {
+		if (client != null)
+			client.RotatePointerL(BitConverter.GetBytes (DateTime.UtcNow.Ticks));
 		part = pointer;
 		deg = -1;
-		if (client != null)
-			client.SendMessageToServer ("UpdateRobot", "RotatePointerL");
 	}
 	
-	void RotatePointerR() {
+	public void RotatePointerR() {
+		if (client != null)
+			client.RotatePointerR(BitConverter.GetBytes (DateTime.UtcNow.Ticks));
 		part = pointer;
 		deg = 1;
-		if (client != null)
-			client.SendMessageToServer ("UpdateRobot", "RotatePointerR");
 	}
 
-	void StopRotate() {
+	public void StopRotate() {
+		if (client != null)
+			client.StopRotate(BitConverter.GetBytes (DateTime.UtcNow.Ticks));
 		part = null;
-		if (client != null)
-			client.SendMessageToServer ("UpdateRobot", "StopRotate");
 	}
 
-	void MoveUp() {
+	public void MoveUp() {
+		if (client != null)
+			client.MoveUp(BitConverter.GetBytes (DateTime.UtcNow.Ticks));
 		moveDir = Vector2.up;
-		if (client != null)
-			client.SendMessageToServer ("UpdateRobot", "MoveUp");
 	}
 
-	void MoveDown() {
+	public void MoveDown() {
+		if (client != null)
+			client.MoveDown(BitConverter.GetBytes (DateTime.UtcNow.Ticks));
 		moveDir = -Vector2.up;
-		if (client != null)
-			client.SendMessageToServer ("UpdateRobot", "MoveDown");
 	}
 
-	void MoveLeft() {
+	public void MoveLeft() {
+		if (client != null)
+			client.MoveLeft(BitConverter.GetBytes (DateTime.UtcNow.Ticks));
 		moveDir = -Vector2.right;
-		if (client != null)
-			client.SendMessageToServer ("UpdateRobot", "MoveLeft");
 	}
 
-	void MoveRight() {
+	public void MoveRight() {
+		if (client != null)
+			client.MoveRight(BitConverter.GetBytes (DateTime.UtcNow.Ticks));
 		moveDir = Vector2.right;
-		if (client != null)
-			client.SendMessageToServer ("UpdateRobot", "MoveRight");
 	}
 
-	void StopMove() {
-		moveDir = Vector2.zero;
+	public void StopMove() {
 		if (client != null)
-			client.SendMessageToServer ("UpdateRobot", "StopMove");
+			client.StopMove(BitConverter.GetBytes (DateTime.UtcNow.Ticks));
+		moveDir = Vector2.zero;
 	}
 
 	private void Move() {
@@ -254,7 +254,9 @@ public class RobotArm : MonoBehaviour {
 		text.text = "(" + string.Format ("{0:0.0}", Mathf.Round (r.x*10f)/10f) + "," + string.Format ("{0:0.0}", Mathf.Round (r.y*10f)/10f) + ")";
 	}
 
-	void Paint() {
+	public void Paint() {
+		if (client != null)
+			client.Paint(BitConverter.GetBytes (DateTime.UtcNow.Ticks));
 		GameObject circle = new GameObject ("PaintTest");
 		circle.AddComponent<SpriteRenderer> ();
 		circle.GetComponent<SpriteRenderer> ().sprite = circleSprites [0];
@@ -271,7 +273,7 @@ public class RobotArm : MonoBehaviour {
 		circle.transform.position = pointer.t.position + 8.33f*pointer.t.up - 10*pointer.t.right;
 	}
 	
-	void Update () {
+	void FixedUpdate () {
 		if(part != null)
 			Rotate (part, deg);
 		if (moveDir != Vector2.zero)

@@ -7,7 +7,7 @@ public class Client : MonoBehaviour {
 	private string IP;
 	private int Port;
 	private NetworkPlayer player;
-	private TimeSpan delay;
+	private int delay;
 
 	// Use this for initialization
 	void Start () {
@@ -34,6 +34,10 @@ public class Client : MonoBehaviour {
 			}
 		}
 	}
+
+	void ToggleDelay() {
+		delay = transform.Find ("Toggle").GetComponent<Toggle> ().isOn ? 2000 : 0;
+	}
 	
 	void Connect() {
 		if (Network.peerType != NetworkPeerType.Disconnected)
@@ -46,38 +50,75 @@ public class Client : MonoBehaviour {
 	}
 
 	void OnConnectedToServer() {
-		SendMessageToServer("CalculateDelay", DateTime.UtcNow.ToString());
+		//SendMessageToServer("CalculateDelay", DateTime.UtcNow.ToString ());
 	}
 
 	[RPC]
 	void SetNetworkPlayer(NetworkPlayer player) {
 		this.player = player;
 	}
-
-	[RPC]
-	void SetDelay(string delaystr) {
-		delay = TimeSpan.Parse (delaystr);
-	}
-
+	
 	[RPC]
 	public void SendMessageToServer(string func, string msg){
 		GetComponent<NetworkView>().RPC(func, RPCMode.Server, msg);
 		print ("Sent message: " + msg);
 	}
-	
-	[RPC]
-	void ReceiveMessageFromServer(string msg) {
-		print ("Received message: "+msg);
-		//messagelog += someInfo + "\n";
-	}
-	
+
 	// fix RPC errors
 	[RPC]
-	void UpdateRobot(string message) { }
+	public void PrintMessageFromClient(string msg) { }
 	[RPC]
-	void CalculateDelay(string delay) { }
+	public void RotateArm1L(byte[] datetime) {
+		GetComponent<NetworkView>().RPC("RotateArm1L", RPCMode.Server, BitConverter.GetBytes(delay));
+	}
 	[RPC]
-	void SendMessageToClient(string func, string msg) { }
+	public void RotateArm1R(byte[] datetime) {
+		GetComponent<NetworkView>().RPC("RotateArm1R", RPCMode.Server, BitConverter.GetBytes(delay));
+	}
 	[RPC]
-	void ReceiveMessageFromClient(string msg) { }
+	public void RotateArm2L(byte[] datetime) {
+		GetComponent<NetworkView>().RPC("RotateArm2L", RPCMode.Server, BitConverter.GetBytes(delay));
+	}
+	[RPC]
+	public void RotateArm2R(byte[] datetime) {
+		GetComponent<NetworkView>().RPC("RotateArm2R", RPCMode.Server, BitConverter.GetBytes(delay));
+	}
+	[RPC]
+	public void RotatePointerL(byte[] datetime) {
+		GetComponent<NetworkView>().RPC("RotatePointerL", RPCMode.Server, BitConverter.GetBytes(delay));
+	}
+	[RPC]
+	public void RotatePointerR(byte[] datetime) {
+		GetComponent<NetworkView>().RPC("RotatePointerR", RPCMode.Server, BitConverter.GetBytes(delay));
+	}
+	[RPC]
+	public void StopRotate(byte[] datetime) {
+			GetComponent<NetworkView>().RPC("StopRotate", RPCMode.Server, BitConverter.GetBytes(delay));
+	}
+	[RPC]
+	public void MoveUp(byte[] datetime) {
+		GetComponent<NetworkView>().RPC("MoveUp", RPCMode.Server, BitConverter.GetBytes(delay));
+	}
+	[RPC]
+	public void MoveDown(byte[] datetime) {
+		GetComponent<NetworkView>().RPC("MoveDown", RPCMode.Server, BitConverter.GetBytes(delay));
+	}
+	[RPC]
+	public void MoveLeft(byte[] datetime) {
+		GetComponent<NetworkView>().RPC("MoveLeft", RPCMode.Server, BitConverter.GetBytes(delay));
+	}
+	[RPC]
+	public void MoveRight(byte[] datetime) {
+		GetComponent<NetworkView>().RPC("MoveRight", RPCMode.Server, BitConverter.GetBytes(delay));
+	}
+	[RPC]
+	public void StopMove(byte[] datetime) {
+		GetComponent<NetworkView>().RPC("StopMove", RPCMode.Server, BitConverter.GetBytes(delay));
+	}
+	[RPC]
+	public void Paint(byte[] datetime) {
+		GetComponent<NetworkView>().RPC("Paint", RPCMode.Server, BitConverter.GetBytes(delay));
+	}
+	[RPC]
+	public void SendMessageToClient(string func, string msg) { }
 }

@@ -6,7 +6,8 @@ using System;
 public class Server : MonoBehaviour {
 	private string IP = "127.0.0.1";
 	private int Port = 25001;
-	private TimeSpan delay;
+	private long start;
+	private long delay;
 	public RobotArm robot;
 
 	// Use this for initialization
@@ -33,31 +34,79 @@ public class Server : MonoBehaviour {
 		Destroy (transform.Find ("Create").gameObject);
 		Network.InitializeServer (10, Port);
 	}
+	IEnumerator HoldUp(int timedelay, Action func) {
+		yield return new WaitForSeconds (timedelay / 1000f);
+		func ();
+	}
 
 	[RPC]
-	void UpdateRobot(string message) {
-		print ("Received message: " + message);
-		robot.BroadcastMessage (message);
+	void RotateArm1L(byte[] data) {
+		int delay = BitConverter.ToInt32 (data, 0);
+		StartCoroutine(HoldUp (delay, robot.RotateArm1L));
+	}
+	[RPC]
+	void RotateArm1R(byte[] data) {
+		int delay = BitConverter.ToInt32 (data, 0);
+		StartCoroutine(HoldUp (delay, robot.RotateArm1R));
+	}
+	[RPC]
+	void RotateArm2L(byte[] data) {
+		int delay = BitConverter.ToInt32 (data, 0);
+		StartCoroutine(HoldUp (delay, robot.RotateArm2L));
+	}
+	[RPC]
+	void RotateArm2R(byte[] data) {
+		int delay = BitConverter.ToInt32 (data, 0);
+		StartCoroutine(HoldUp (delay, robot.RotateArm2R));
+	}
+	[RPC]
+	void RotatePointerL(byte[] data) {
+		int delay = BitConverter.ToInt32 (data, 0);
+		StartCoroutine(HoldUp (delay, robot.RotatePointerL));
+	}
+	[RPC]
+	void RotatePointerR(byte[] data) {
+		int delay = BitConverter.ToInt32 (data, 0);
+		StartCoroutine(HoldUp (delay, robot.RotatePointerR));
+	}
+	[RPC]
+	void StopRotate(byte[] data) {
+		int delay = BitConverter.ToInt32 (data, 0);
+		StartCoroutine(HoldUp (delay, robot.StopRotate));
+	}
+	[RPC]
+	void MoveUp(byte[] data) {
+		int delay = BitConverter.ToInt32 (data, 0);
+		StartCoroutine(HoldUp (delay, robot.MoveUp));
+	}
+	[RPC]
+	void MoveDown(byte[] data) {
+		int delay = BitConverter.ToInt32 (data, 0);
+		StartCoroutine(HoldUp (delay, robot.MoveDown));
+	}
+	[RPC]
+	void MoveLeft(byte[] data) {
+		int delay = BitConverter.ToInt32 (data, 0);
+		StartCoroutine(HoldUp (delay, robot.MoveLeft));
+	}
+	[RPC]
+	void MoveRight(byte[] data) {
+		int delay = BitConverter.ToInt32 (data, 0);
+		StartCoroutine(HoldUp (delay, robot.MoveRight));
+	}
+	[RPC]
+	void StopMove(byte[] data) {
+		int delay = BitConverter.ToInt32 (data, 0);
+		StartCoroutine(HoldUp (delay, robot.StopMove));
+	}
+	[RPC]
+	void Paint(byte[] data) {
+		int delay = BitConverter.ToInt32 (data, 0);
+		StartCoroutine(HoldUp (delay, robot.Paint));
 	}
 
 	void OnPlayerConnected(NetworkPlayer player) {
-		print ("Player Connected");
-		print ("Sending NetworkPlayer...");
 		GetComponent<NetworkView>().RPC("SetNetworkPlayer", RPCMode.Others, player);
-	}
-
-	[RPC]
-	void CalculateDelay(string datetime) {
-		DateTime t2 = DateTime.UtcNow;
-		DateTime t1 = DateTime.Parse (datetime);
-		delay = t2 - t1;
-		SendMessageToClient("SetDelay", delay.ToString ());
-		print (delay);
-	}
-	
-	[RPC]
-	void ReceiveMessageFromClient(string msg) {
-		print ("Received message: "+msg);
 	}
 
 	[RPC]
@@ -65,14 +114,14 @@ public class Server : MonoBehaviour {
 		GetComponent<NetworkView>().RPC(func, RPCMode.Others, msg);
 		print ("Sent message: "+msg);
 	}
+	[RPC]
+	void PrintMessageFromClient(string msg) {
+		print ("Client: "+msg);
+	}
 	
 	// fix RPC errors
-	[RPC]
-	void SetDelay(string delay) { }
 	[RPC]
 	void SetNetworkPlayer(NetworkPlayer player) { }
 	[RPC]
 	void SendMessageToServer(string func, string msg) { }
-	[RPC]
-	void ReceiveMessageFromServer(string msg) { }
 }

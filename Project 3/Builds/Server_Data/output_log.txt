@@ -12,30 +12,74 @@ Platform assembly: C:\Users\Michael\Documents\Trial&Error\Project 3\Builds\Serve
 Loading C:\Users\Michael\Documents\Trial&Error\Project 3\Builds\Server_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
 Platform assembly: C:\Users\Michael\Documents\Trial&Error\Project 3\Builds\Server_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading C:\Users\Michael\Documents\Trial&Error\Project 3\Builds\Server_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.054 seconds
+- Completed reload, in  0.055 seconds
 desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
 Platform assembly: C:\Users\Michael\Documents\Trial&Error\Project 3\Builds\Server_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\Michael\Documents\Trial&Error\Project 3\Builds\Server_Data\Managed\System.dll (this message is harmless)
-Player Connected
+RA1R
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 
-Sending NetworkPlayer...
+SR
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 
-00:00:00.7159732
+RA1R
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 
-RPC call failed because the function 'UpdateRobot' in 'Server' does not have the RPC attribute. You need to add the RPC attribute in front of the function declaration
+SR
  
-(Filename:  Line: 55)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 
-RPC call failed because the function 'UpdateRobot' in 'Server' does not have the RPC attribute. You need to add the RPC attribute in front of the function declaration
+RA1R
  
-(Filename:  Line: 55)
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+SR
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+RA1L
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+SR
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+RA1R
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+SR
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+RA2L
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+SR
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+RA1L
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+SR
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+RA1R
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
+
+SR
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebug.gen.cpp Line: 56)
 
