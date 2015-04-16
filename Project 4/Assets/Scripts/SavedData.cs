@@ -26,8 +26,8 @@ public class SavedData : MonoBehaviour {
 		bugNum.text = (num+1).ToString ();
 
 		k11.text = bug.K [0, 0].ToString ();
-		k12.text = bug.K [0, 1].ToString ();
-		k21.text = bug.K [1, 0].ToString ();
+		k12.text = bug.K [1, 0].ToString ();
+		k21.text = bug.K [0, 1].ToString ();
 		k22.text = bug.K [1, 1].ToString ();
 
 		bugX.text = bug.transform.position.x.ToString ();
@@ -83,10 +83,10 @@ public class SavedData : MonoBehaviour {
 			bug.K [0, 0] = k11F;
 		float k12F;
 		if (float.TryParse (k12.text, out k12F))
-			bug.K [0, 1] = k12F;
+			bug.K [1, 0] = k12F;
 		float k21F;
 		if (float.TryParse (k21.text, out k21F))
-			bug.K [1, 0] = k21F;
+			bug.K [0, 1] = k21F;
 		float k22F;
 		if (float.TryParse (k22.text, out k22F))
 			bug.K [1, 1] = k22F;
@@ -167,6 +167,7 @@ public class SavedData : MonoBehaviour {
 	public void Play()
 	{
 		foreach (Buggy bug in bugs) {
+			bug.SetLights(lights);
 			bug.Activate ();
 		}
 	}

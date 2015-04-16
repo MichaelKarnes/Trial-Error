@@ -1,10 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Buggy.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Camera.cs">
     <Files>
-      <File FileName="..\Project 4 (Box With Wheels)\Assets\GUI Scripts\Bug.cs" Line="5" Column="29" />
       <File FileName="..\Project 4 (Box With Wheels)\Assets\GUI Scripts\SavedData.cs" Line="17" Column="30" />
-      <File FileName="Assets\Scripts\Buggy.cs" Line="10" Column="20" />
+      <File FileName="Assets\Scripts\Buggy.cs" Line="29" Column="13" />
+      <File FileName="Assets\Scripts\SavedData.cs" Line="147" Column="20" />
+      <File FileName="Assets\Scripts\Camera.cs" Line="13" Column="30" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
