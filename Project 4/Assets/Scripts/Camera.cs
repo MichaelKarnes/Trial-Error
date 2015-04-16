@@ -10,7 +10,7 @@ public class Camera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetMouseButton(0)) {
+		if (Input.GetMouseButton(2)) {
 			transform.Translate(Vector3.right * -Input.GetAxis("Mouse X") * 1f);
 			transform.Translate(transform.up * -Input.GetAxis("Mouse Y") * 1f, Space.World);
 		}

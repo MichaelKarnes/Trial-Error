@@ -8,6 +8,10 @@ public class SavedData : MonoBehaviour {
 	public List<Light> lights;
 	public Transform prefab;
 
+	private float Round(float f) {
+		return Mathf.Round (f * 100f) / 100f;
+	}
+
 	public void FindBugData() {
 		Slider bugSelector = (Slider)GameObject.Find ("BugSelector").GetComponent (typeof(Slider));
 		int num = (int)bugSelector.value;
@@ -25,15 +29,15 @@ public class SavedData : MonoBehaviour {
 
 		bugNum.text = (num+1).ToString ();
 
-		k11.text = bug.K [0, 0].ToString ();
-		k12.text = bug.K [1, 0].ToString ();
-		k21.text = bug.K [0, 1].ToString ();
-		k22.text = bug.K [1, 1].ToString ();
+		k11.text = Round(bug.K [0, 0]).ToString ();
+		k12.text = Round(bug.K [1, 0]).ToString ();
+		k21.text = Round(bug.K [0, 1]).ToString ();
+		k22.text = Round(bug.K [1, 1]).ToString ();
 
-		bugX.text = bug.transform.position.x.ToString ();
-		bugY.text = bug.transform.position.z.ToString ();
-		bugR.text = bug.transform.rotation.eulerAngles.y.ToString ();
-		bugSize.text = bug.transform.localScale.x.ToString ();
+		bugX.text = Mathf.Round(bug.transform.position.x).ToString ();
+		bugY.text = Mathf.Round(bug.transform.position.z).ToString ();
+		bugR.text = Mathf.Round(bug.transform.rotation.eulerAngles.y).ToString ();
+		bugSize.text = Mathf.Round(bug.transform.localScale.x).ToString ();
 	}
 
 	public void UpdateNumberOfBugs()
@@ -48,7 +52,7 @@ public class SavedData : MonoBehaviour {
 			bugs.RemoveAt (bugs.Count - 1);
 			Destroy (go);
 		}
-		if (bugs.Count < num) {
+		while (bugs.Count < num) {
 			GameObject go = (Instantiate (prefab, prefab.transform.position, prefab.transform.rotation) as Transform).gameObject;
 			go.SetActive (true);
 			Buggy b = go.GetComponent<Buggy>();
@@ -80,31 +84,31 @@ public class SavedData : MonoBehaviour {
 
 		float k11F;
 		if (float.TryParse (k11.text, out k11F))
-			bug.K [0, 0] = k11F;
+			bug.K [0, 0] = Round (k11F);
 		float k12F;
 		if (float.TryParse (k12.text, out k12F))
-			bug.K [1, 0] = k12F;
+			bug.K [1, 0] = Round (k12F);
 		float k21F;
 		if (float.TryParse (k21.text, out k21F))
-			bug.K [0, 1] = k21F;
+			bug.K [0, 1] = Round (k21F);
 		float k22F;
 		if (float.TryParse (k22.text, out k22F))
-			bug.K [1, 1] = k22F;
+			bug.K [1, 1] = Round (k22F);
 
 		float bugXF;
 		if (float.TryParse (bugX.text, out bugXF))
-			bug.transform.position = new Vector3 (bugXF, bug.transform.position.y, bug.transform.position.z);
+			bug.transform.position = new Vector3 (Mathf.Round (bugXF), bug.transform.position.y, Mathf.Round(bug.transform.position.z));
 		float bugYF;
 		if (float.TryParse (bugY.text, out bugYF))
-			bug.transform.position = new Vector3 (bug.transform.position.x, bug.transform.position.y, bugYF);
+			bug.transform.position = new Vector3 (Mathf.Round(bug.transform.position.x), bug.transform.position.y, Mathf.Round (bugYF));
 
 		float bugRF;
 		if (float.TryParse (bugR.text, out bugRF))
-			bug.transform.rotation = Quaternion.AngleAxis(bugRF, Vector3.up);
+			bug.transform.rotation = Quaternion.AngleAxis(Mathf.Round (bugRF), Vector3.up);
 
 		float bugSizeF;
 		if (float.TryParse (bugSize.text, out bugSizeF))
-			bug.transform.localScale = new Vector3 (bugSizeF, bugSizeF, bugSizeF);
+			bug.transform.localScale = new Vector3 (Mathf.Round (bugSizeF), Mathf.Round (bugSizeF), Mathf.Round (bugSizeF));
 	}
 
 	public void FindLightData() {
@@ -118,8 +122,8 @@ public class SavedData : MonoBehaviour {
 		
 		lightNum.text = (num+1).ToString ();
 		
-		lightX.text = light.transform.position.x.ToString ();
-		lightY.text = light.transform.position.z.ToString ();
+		lightX.text = Mathf.Round (light.transform.position.x).ToString ();
+		lightY.text = Mathf.Round (light.transform.position.z).ToString ();
 	}
 	
 	public void UpdateNumberOfLights()
@@ -134,7 +138,7 @@ public class SavedData : MonoBehaviour {
 			lights.RemoveAt (lights.Count - 1);
 			Destroy (go);
 		}
-		if (lights.Count < num) {
+		while (lights.Count < num) {
 			GameObject go = new GameObject("Light"+(lights.Count+1));
 			Light l = go.AddComponent<Light>();
 			l.transform.position = new Vector3(0,1,0);
@@ -158,10 +162,10 @@ public class SavedData : MonoBehaviour {
 		
 		float lightXF;
 		if (float.TryParse (lightX.text, out lightXF))
-			light.transform.position = new Vector3 (lightXF, light.transform.position.y, light.transform.position.z);
+			light.transform.position = new Vector3 (Mathf.Round (lightXF), light.transform.position.y, Mathf.Round (light.transform.position.z));
 		float lightYF;
 		if (float.TryParse (lightY.text, out lightYF))
-			light.transform.position = new Vector3 (light.transform.position.x, light.transform.position.y, lightYF);
+			light.transform.position = new Vector3 (Mathf.Round (light.transform.position.x), light.transform.position.y, Mathf.Round (lightYF));
 	}
 
 	public void Play()

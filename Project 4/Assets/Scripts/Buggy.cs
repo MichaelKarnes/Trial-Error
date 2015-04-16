@@ -14,6 +14,7 @@ public class Buggy : MonoBehaviour {
 
 	public void Init() {
 		K = new float[2, 2]{{-.5f,1},{1,-.5f}};
+		lights = new List<Light> ();
 	}
 
 	// Use this for initialization
@@ -30,6 +31,10 @@ public class Buggy : MonoBehaviour {
 	}
 
 	public void Activate() {
+		LeftWheel.enabled = false;
+		RightWheel.enabled = false;
+		LeftWheel.enabled = true;
+		RightWheel.enabled = true;
 		on = true;
 	}
 	
@@ -43,7 +48,6 @@ public class Buggy : MonoBehaviour {
 			LeftWheel.motorTorque += K[0,0]*100/DistanceToLight (LeftSensor, light) + K[1,0]*100/DistanceToLight (RightSensor, light);
 			RightWheel.motorTorque += K[0,1]*100/DistanceToLight (LeftSensor, light) + K[1,1]*100/DistanceToLight (RightSensor, light);
 		}
-		print (this.name+": " + K[0,0]+","+K[1,0]+","+K[0,1]+","+K[1,1]);
 		LeftWheel.transform.Find ("Tire_L").Rotate (LeftWheel.rpm / 60 * 360 * Time.deltaTime,0,0);
 		RightWheel.transform.Find ("Tire_R").Rotate (RightWheel.rpm / 60 * 360 * Time.deltaTime,0,0);
 	}
