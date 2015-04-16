@@ -2,7 +2,9 @@
   <MonoDevelop.Ide.Workspace />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Buggy.cs">
     <Files>
-      <File FileName="Assets\Scripts\Buggy.cs" Line="15" Column="57" />
+      <File FileName="..\Project 4 (Box With Wheels)\Assets\GUI Scripts\Bug.cs" Line="5" Column="29" />
+      <File FileName="..\Project 4 (Box With Wheels)\Assets\GUI Scripts\SavedData.cs" Line="17" Column="30" />
+      <File FileName="Assets\Scripts\Buggy.cs" Line="10" Column="20" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
